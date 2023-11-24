@@ -1,0 +1,18 @@
+strong {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+img {
+    margin: 10px 0px;
+    width: 100%;
+}
+
+.em-background {
+    background-color: red;
+}
+
+.ql-align-justify a {
+    text-decoration: underline;
+    color: red;
+}
