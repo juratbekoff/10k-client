@@ -1,12 +1,6 @@
 import { postProps } from "@/constants";
-import {
-  captchaProps,
-  usGetPostById,
-  useCreateView,
-  useGetCaptcha,
-  useVerifyCaptcha,
-} from "@/lib/react-query";
-import { captchaSolver, dateFormatter } from "@/utils";
+import { usGetPostById, useCreateView, useGetIp } from "@/lib/react-query";
+import { dateFormatter } from "@/utils";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { Link, useParams } from "react-router-dom";
 
@@ -24,9 +18,9 @@ const PostView = () => {
     postId: +postId!,
     streamId: +streamId!,
   });
-  const getCaptcha = useGetCaptcha();
-  const verifyCaptcha = useVerifyCaptcha();
   const createView = useCreateView();
+  const getIp = useGetIp();
+  const Ip = getIp.data?.data?.ip;
 
   if (getPost.isError) {
     return <StateShower name="Something went wrong! Plz, try again later!" />;
@@ -38,31 +32,17 @@ const PostView = () => {
     const scrollPercentage = calculateScrollPercentage();
 
     if (scrollPercentage >= 50 && !apiRequestSent) {
-      // get captcha
-      let captcha: captchaProps = getCaptcha.data?.data;
-
-      // get answer
-      const answer = captchaSolver(captcha?.math_problem);
-
-      // verify captcha
-      verifyCaptcha.mutate(answer, {
-        onSuccess() {
-          createView.mutate(
-            { postId: +postId!, streamId: +streamId! },
-            {
-              onSuccess(data) {
-                console.log(data.data);
-              },
-              onError(error) {
-                console.log(error);
-              },
-            }
-          );
-        },
-        onError(error) {
-          console.log(error);
-        },
-      });
+      createView.mutate(
+        { postId: +postId!, streamId: +streamId!, Ip },
+        {
+          onSuccess(data) {
+            console.log(data.data);
+          },
+          onError(error) {
+            console.log(error);
+          },
+        }
+      );
 
       setApiRequestSent(true);
     }
@@ -74,7 +54,7 @@ const PostView = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [apiRequestSent, getCaptcha.data?.data]);
+  }, [apiRequestSent, Ip]);
 
   return getPost.isFetching ? (
     <StateShower name="Loading..." />

@@ -7,23 +7,35 @@ const api = axios.create({
   baseURL: baseURL_PROD,
 });
 
-export const createView = async (postId: number, streamId: number) => {
+export const createView = async (
+  postId: number,
+  streamId: number,
+  Ip: string
+) => {
   return await api.post("/views", {
     postId,
     streamId,
+    Ip,
   });
 };
 
-export const getCaptcha = async () => {
-  return await api.get("/captcha");
+export const generateCaptcha = async (Ip: string) => {
+  return await api.post("/captcha", {
+    Ip,
+  });
 };
 
-export const verifyCaptcha = async (answer: number) => {
+export const verifyCaptcha = async (answer: number, Ip: string) => {
   return api.post("/captcha/verify", {
     answer,
+    Ip,
   });
 };
 
 export const getPost = async (streamId: number, postId: number) => {
   return await api.get(`/posts/stream?streamId=${streamId}&postId=${postId}`);
+};
+
+export const getIP = async () => {
+  return await api.get(`https://api.ipify.org/?format=json`);
 };

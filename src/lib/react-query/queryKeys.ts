@@ -8,4 +8,7 @@ export enum queryKeys {
   //captcha
   GET_CAPTCHA = "GET_CAPTCHA",
   VERIFY_CAPTCHA = "VERIFY_CAPTCHA",
+
+  // Ip
+  GET_IP = "GET_IP",
 }
