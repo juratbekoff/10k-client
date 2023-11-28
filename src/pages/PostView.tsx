@@ -22,10 +22,6 @@ const PostView = () => {
   const getIp = useGetIp();
   const Ip = getIp.data?.data?.ip;
 
-  if (getPost.isError) {
-    return <StateShower name="Something went wrong! Plz, try again later!" />;
-  }
-
   const post: postProps = getPost.data?.data?.post;
 
   const handleScroll = () => {
@@ -56,6 +52,25 @@ const PostView = () => {
     };
   }, [apiRequestSent, Ip]);
 
+  if (getPost.isError) {
+    const postError = getPost.error as unknown as {
+      response: {
+        status: number;
+      };
+    };
+
+    if (getPost.error?.message === "Network Error") {
+      return <StateShower name="Something went wrong! Plz, try again later!" />;
+    }
+
+    if (
+      postError.response.status === 404 ||
+      postError.response.status === 400
+    ) {
+      return <StateShower name="No info is found" />;
+    }
+  }
+
   return getPost.isFetching ? (
     <StateShower name="Loading..." />
   ) : (
@@ -84,8 +99,12 @@ const PostView = () => {
             <CopyrightIcon />
             Manba:
           </div>
-          <Link to={"#"} className="font-semibold">
-            Kun.uz
+          <Link
+            to={post.source_link ? post.source_link : "#"}
+            className="font-semibold"
+            target="_blank"
+          >
+            {post.source_name ? post.source_name : "Ko'rsatilmagan"}
           </Link>
         </div>
       </div>

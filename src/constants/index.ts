@@ -14,7 +14,7 @@ export interface postProps {
   ads_post_link: string | null;
   createdAt: string;
   updatedAt: string;
-  category: {
-    name: string;
-  };
+  category: string;
+  source_name: string;
+  source_link: string;
 }

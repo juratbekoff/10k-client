@@ -6,7 +6,8 @@ const StateShower = ({
     | "Updating..."
     | "Loading..."
     | "No data"
-    | "Something went wrong! Plz, try again later!";
+    | "Something went wrong! Plz, try again later!"
+    | "No info is found";
 }) => {
   return (
     <div className="flex justify-center items-center h-[20vh] select-none">
