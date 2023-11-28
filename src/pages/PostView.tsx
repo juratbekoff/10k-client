@@ -56,6 +56,14 @@ const PostView = () => {
     };
   }, [apiRequestSent, Ip]);
 
+  useEffect(() => {
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7535657012494589"
+      crossOrigin="anonymous"
+    ></script>;
+  }, []);
+
   return getPost.isFetching ? (
     <StateShower name="Loading..." />
   ) : (
