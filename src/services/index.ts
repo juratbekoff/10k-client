@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const baseURL_LOCAL = "http://localhost:3001/api/v1";
-// const baseURL_PROD = "https://api.10k.uz/api/v1";
+// const baseURL_LOCAL = "http://localhost:3001/api/v1";
+const baseURL_PROD = "https://api.10k.uz/api/v1";
 
 const api = axios.create({
-  baseURL: baseURL_LOCAL,
+  baseURL: baseURL_PROD,
 });
 
 export const createView = async (
