@@ -52,6 +52,16 @@ const PostView = () => {
     };
   }, [apiRequestSent, Ip]);
 
+  useEffect(() => {
+    (function (d) {
+      let s = d.createElement("script");
+      s.async = true;
+      s.src =
+        "https://puabvo.com/code/native.js?h=waWQiOjExNzEwMTYsInNpZCI6MTMwNTY2OCwid2lkIjo1MTc0NjEsInNyYyI6Mn0=eyJ";
+      d.head.appendChild(s);
+    })(document);
+  }, []);
+
   if (getPost.isError) {
     const postError = getPost.error as unknown as {
       response: {
