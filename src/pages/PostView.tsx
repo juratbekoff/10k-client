@@ -75,7 +75,7 @@ const PostView = () => {
     <StateShower name="Loading..." />
   ) : (
     <>
-      <AdsComponent dataAdSlot="6789922017" />
+      {/* <AdsComponent dataAdSlot="6789922017" /> */}
       <div className="flex flex-col mx-[27%] mt-[2%] max-lg:mx-[15%] max-md:mx-[10%] max-md:mt-[7%] min-h-[100vh] ">
         <h1 className="text-3xl font-semibold text-gray-800 max-md:text-2xl">
           {post?.title}
