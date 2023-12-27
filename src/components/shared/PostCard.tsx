@@ -12,7 +12,10 @@ const PostCard = ({ ...data }: Post) => {
       />
 
       <div className="flex flex-col justify-between gap-3 py-1 ">
-        <Link to={`/posts/${data.id}`} className="font-semibold max-md:text-sm">
+        <Link
+          to={`/posts/${data.id}`}
+          className="font-semibold max-md:text-base"
+        >
           {data.title}
         </Link>
         <div className="flex justify-between ">
