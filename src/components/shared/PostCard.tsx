@@ -13,8 +13,7 @@ const PostCard = ({ ...data }: Post) => {
 
       <div className="flex flex-col justify-between gap-3 py-1 ">
         <Link to={`/posts/${data.id}`} className="font-semibold max-md:text-sm">
-          Xiaomi 14 Ultra "super flagman" ning asosiy xususiyatlari haqida
-          ma'lumotlar
+          {data.title}
         </Link>
         <div className="flex justify-between ">
           <span className="text-blue-900 font-semibold text-base max-md:text-sm">
