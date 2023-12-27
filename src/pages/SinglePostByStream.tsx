@@ -1,5 +1,5 @@
 import { postProps } from "@/constants";
-import { usGetPostById, useCreateView, useGetIp } from "@/lib/react-query";
+import { usGetPostByStream, useCreateView, useGetIp } from "@/lib/react-query";
 import { dateFormatter } from "@/utils";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { Link, useParams } from "react-router-dom";
@@ -9,12 +9,12 @@ import { AdsComponent, StateShower } from "@/components";
 import { useEffect, useState } from "react";
 import { calculateScrollPercentage } from "@/utils/scroll";
 
-const PostView = () => {
+const SinglePostByStream = () => {
   const { postId, streamId } = useParams();
   const [apiRequestSent, setApiRequestSent] = useState(false);
 
   // react-queries api
-  const getPost = usGetPostById({
+  const getPost = usGetPostByStream({
     postId: +postId!,
     streamId: +streamId!,
   });
@@ -85,7 +85,7 @@ const PostView = () => {
     <StateShower name="Loading..." />
   ) : (
     <>
-      {/* <AdsComponent dataAdSlot="6789922017" /> */}
+      <AdsComponent dataAdSlot="6789922017" />
       <div className="flex flex-col mx-[27%] mt-[2%] max-lg:mx-[15%] max-md:mx-[10%] max-md:mt-[7%] min-h-[100vh] ">
         <h1 className="text-3xl font-semibold text-gray-800 max-md:text-2xl">
           {post?.title}
@@ -124,4 +124,4 @@ const PostView = () => {
   );
 };
 
-export default PostView;
+export default SinglePostByStream;

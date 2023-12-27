@@ -32,8 +32,16 @@ export const verifyCaptcha = async (answer: number, Ip: string) => {
   });
 };
 
-export const getPost = async (streamId: number, postId: number) => {
+export const getPostByStream = async (streamId: number, postId: number) => {
   return await api.get(`/posts/stream?streamId=${streamId}&postId=${postId}`);
+};
+
+export const getPostById = async (postId: number) => {
+  return await api.get(`/posts/common/${postId}`);
+};
+
+export const getPostsList = async (page: number = 1) => {
+  return await api.get(`/posts/user?page=${page}&limit=20&role=user`);
 };
 
 export const getIP = async () => {

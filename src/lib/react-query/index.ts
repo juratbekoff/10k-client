@@ -4,7 +4,9 @@ import {
   createView,
   generateCaptcha,
   getIP,
-  getPost,
+  getPostById,
+  getPostByStream,
+  getPostsList,
   verifyCaptcha,
 } from "@/services";
 
@@ -20,11 +22,33 @@ export interface captchaProps {
   Ip: string;
 }
 
-export const usGetPostById = (data: postProps) => {
+export const usGetPostByStream = (data: postProps) => {
   return useQuery({
     queryKey: [queryKeys.GET_POST_BY_ID],
     queryFn: () => {
-      return getPost(data.streamId, data.postId);
+      return getPostByStream(data.streamId, data.postId);
+    },
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const usGetPostById = (postId: number) => {
+  return useQuery({
+    queryKey: [queryKeys.GET_POST_BY_ID],
+    queryFn: () => {
+      return getPostById(postId);
+    },
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const usGetPostsList = (page: number) => {
+  return useQuery({
+    queryKey: [queryKeys.GET_POSTS_LIST],
+    queryFn: () => {
+      return getPostsList(page);
     },
     retry: 1,
     refetchOnWindowFocus: false,
